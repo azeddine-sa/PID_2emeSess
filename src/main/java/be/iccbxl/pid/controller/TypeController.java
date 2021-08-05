@@ -29,7 +29,7 @@ public class TypeController {
 	
 	@GetMapping("/types/{id}")
     public String show(Model model, @PathVariable("id") String id) {
-		Type type = service.get(id);
+		Type type = service.getType(id);
 
 		model.addAttribute("type", type);
 		model.addAttribute("title", "Fiche d'un type");
