@@ -1,4 +1,4 @@
-package be.iccbxl.pid;
+package be.iccbxl.pid.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
