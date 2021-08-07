@@ -28,6 +28,14 @@
 	        </ul>
 	        <p th:if="${#lists.size(show.representations)==0}">Aucune représentation</p>
 
+			<h2>Liste des artistes</h2>
+	        <ul th:if="${#lists.size(show.artistTypes)>=1}">
+	                <li th:each="collaborateur : ${show.artistTypes}" 
+	    		th:text="|${collaborateur.artist.firstname} ${collaborateur.artist.lastname } (${collaborateur.type.type})|">
+	                    Firstname Lastname (type)
+	                </li>              
+	        </ul>
+
         
 	        <nav><a th:href="@{/shows}">Retour à l'index</a></nav>
 	     </div>
