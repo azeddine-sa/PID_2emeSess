@@ -29,12 +29,11 @@ public class ArtistService {
 		artistRepository.save(artist);
 	}
 
-	public void updateArtist(String id, Artist artist) {
+	public void updateArtist(Long id, Artist artist) {
 		artistRepository.save(artist);
 	}
 
-	public void deleteArtist(String id) {
-		Long indice = (long) Integer.parseInt(id);
-		artistRepository.deleteById(indice);
+	public void deleteArtist(Long id) {
+		artistRepository.deleteById(id);
 	}
 }
