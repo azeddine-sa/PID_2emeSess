@@ -17,12 +17,11 @@ import javax.validation.constraints.NotEmpty;
 @Table(name="types")
 public class Type {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
 	@NotEmpty(message = "Ne peut être vide.")
-	@Size(min=2, max=60, message = "Doit contenir au minimum 2 carratères et 60 au maximum.")
-
+	@Size(min=2, max=60, message = "Doit contenir au minimum 2 caractères et 60 maximum.")
 	private String type;
 
 	@ManyToMany

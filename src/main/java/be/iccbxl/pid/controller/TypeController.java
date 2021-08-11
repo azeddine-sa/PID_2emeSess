@@ -3,6 +3,7 @@ package be.iccbxl.pid.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -42,25 +44,25 @@ public class TypeController {
         return "type/show";
     }
 
-	@GetMapping("/artists/create")
+	@GetMapping("/types/create")
 	public String create(Model model) {
-	    Artist artist = new Artist(null,null);
+	    Type type = new Type(null);
 
-	    model.addAttribute("artist", artist);
+	    model.addAttribute("type", type);
 		
-	    return "artist/create";
+	    return "type/create";
 	}
 	
-	@PostMapping("/artists/create")
-	public String store(@Valid @ModelAttribute("artist") Artist artist, BindingResult bindingResult, Model model) {
+	@PostMapping("/types/create")
+	public String store(@Valid @ModelAttribute("type") Type type, BindingResult bindingResult, Model model) {
 	    
 	    if (bindingResult.hasErrors()) {
-		return "artist/create";
+			return "type/create";
 	    }
 		    
-	    service.addArtist(artist);
+	    service.addType(type);
 	    
-	    return "redirect:/artists/"+artist.getId();
+	    return "redirect:/types/"+type.getId();
 	}
 
 	@GetMapping("/types/{id}/edit")

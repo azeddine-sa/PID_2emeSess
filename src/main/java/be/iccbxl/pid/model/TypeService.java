@@ -30,7 +30,7 @@ public class TypeService {
 		repository.save(type);
 	}
 
-	public void updateType(String id, Type type) {
+	public void updateType(Long id, Type type) {
 		repository.save(type);
 	}
 
