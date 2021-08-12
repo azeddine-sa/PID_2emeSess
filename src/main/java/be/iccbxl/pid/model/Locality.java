@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import javax.persistence.OneToMany;
 
 
@@ -15,9 +17,13 @@ import javax.persistence.OneToMany;
 @Table(name="localities")
 public class Locality {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	@NotEmpty(message="Ne peut être vide")
+	@Size(max=6, message="Doit contenir au maximum 6 caractères.")
 	private String postalCode;
+	@NotEmpty(message="Ne peut être vide")
+	@Size(max=60, message="Doit contenir au maximum 60 caractères.")
 	private String locality;
 
 	@OneToMany(targetEntity=Location.class, mappedBy="locality")

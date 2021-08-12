@@ -3,11 +3,16 @@ package be.iccbxl.pid.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import be.iccbxl.pid.model.Locality;
 import be.iccbxl.pid.model.LocalityService;
@@ -36,5 +41,27 @@ public class LocalityController {
 		
         return "locality/show";
     }
+
+	@GetMapping("/localities/create")
+	public String create(Model model) {
+	    Locality locality = new Locality(null,null);
+
+	    model.addAttribute("locality", locality);
+		
+	    return "locality/create";
+	}
+	
+	@PostMapping("/localities/create")
+	public String store(@Valid @ModelAttribute("locality") Locality locality, BindingResult bindingResult, Model model) {
+	    
+	    if (bindingResult.hasErrors()) {
+		return "locality/create";
+	    }
+		    
+	    service.add(locality);
+	    
+	    return "redirect:/localities/"+locality.getId();
+	}
+
 
 }
