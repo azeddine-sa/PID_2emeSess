@@ -32,7 +32,7 @@ public class LocalityService {
 		repository.save(locality);
 	}
 
-	public void update(String id, Locality locality) {
+	public void update(Long id, Locality locality) {
 		repository.save(locality);
 	}
 
