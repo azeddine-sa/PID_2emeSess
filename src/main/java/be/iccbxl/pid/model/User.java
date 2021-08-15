@@ -122,7 +122,7 @@ private String email;
 		return representations;
 	}
 
-public User addRepresentation(Representation representation) {
+	public User addRepresentation(Representation representation) {
 		if(!this.representations.contains(representation)) {
 			this.representations.add(representation);
 			representation.addUser(this);
