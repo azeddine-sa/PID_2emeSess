@@ -19,9 +19,9 @@
 		    </div>
 		    <div>
 		      	<label>type:</label>
-		       	<input type="text" th:field="*{type}">
+		       	<input type="text" th:field="${type.type}">
 		        <p th:if="${#fields.hasErrors('type')}"
-               	th:errors="*{type}" th:errorclass="fieldError"></p>
+               	th:errors="${type.type}" th:errorclass="fieldError"></p>
 		    </div>
 		    
 		    <div>
