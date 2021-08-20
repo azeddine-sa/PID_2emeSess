@@ -58,6 +58,13 @@
 			<artifactId>slugify</artifactId>
 			<version>2.4</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.rometools</groupId>
+			<artifactId>rome</artifactId>
+			<version>1.8.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
