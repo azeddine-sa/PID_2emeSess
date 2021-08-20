@@ -14,7 +14,12 @@ public class HelloController {
 
     @GetMapping("/admin")
     public String admin() {
-        return ("<h1> Hi Admin! </h1>");
+        return "Hi Admin!";
+    }
+    
+    @GetMapping("/member")
+    public String member() {
+        return "Hi Member!";
     }
 
 }

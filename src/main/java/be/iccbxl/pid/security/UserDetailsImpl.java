@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import be.iccbxl.pid.model.User;
 
@@ -19,10 +20,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(user.getRoles().get(0).getRole());
-        authorities.add(authority);
-        return authorities;
+        return Collections.singleton(new SimpleGrantedAuthority(user.getRoles().get(0).getRole()));
     }
 
     @Override
