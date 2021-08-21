@@ -17,7 +17,7 @@ import javax.validation.constraints.NotEmpty;
 @Table(name="types")
 public class Type {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
 	@NotEmpty(message = "Ne peut être vide.")

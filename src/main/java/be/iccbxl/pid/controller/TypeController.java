@@ -11,7 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 import be.iccbxl.pid.model.Type;
 import be.iccbxl.pid.model.TypeService;
@@ -41,25 +48,27 @@ public class TypeController {
         return "type/show";
     }
 
-	@GetMapping("/artists/create")
+	@GetMapping("/types/create")
 	public String create(Model model) {
-	    Artist artist = new Artist(null,null);
+	    Type type = new Type(null);
 
-	    model.addAttribute("artist", artist);
+	    model.addAttribute("type", type);
 		
-	    return "artist/create";
+	    return "type/create";
 	}
 
+	
 	@PostMapping("/types/create")
 	public String store(@Valid @ModelAttribute("type") Type type, BindingResult bindingResult, Model model) {
-
-		if (bindingResult.hasErrors()) {
+	    
+	    if (bindingResult.hasErrors()) {
 			return "type/create";
-		}
+	    }
+		    
+	    service.addType(type);
+	    
+	    return "redirect:/types/"+type.getId();
 
-		service.addType(type);
-
-		return "redirect:/types/"+type.getId();
 	}
 
 	@GetMapping("/types/{id}/edit")

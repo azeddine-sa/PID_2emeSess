@@ -16,6 +16,10 @@
    	        </ul>
 
    	        <p th:if="${#lists.isEmpty(locality.locations)}">Aucun lieu de spectacle.</p>
+
+			<div class="actions">
+				<a th:href="@{/localities/{id}/edit(id=${locality.id})}">Edit</a>
+			</div>		
         
 	        <nav><a th:href="@{/localities}">Retour à l'index</a></nav>
 	     </div>

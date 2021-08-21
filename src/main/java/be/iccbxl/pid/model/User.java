@@ -5,11 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -23,11 +22,11 @@ public class User {
 	private String password;
 	private String firstname;
 	private String lastname;
-private String email;
+	private String email;
 	private String langue;
 	private LocalDateTime created_at;
 	
-	@ManyToMany(mappedBy = "users")
+	@ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
 	private List<Role> roles = new ArrayList<>();
 
 	@ManyToMany(mappedBy = "users")
@@ -86,7 +85,7 @@ private String email;
 		this.email = email;
 	}
 	 
-        public String getLangue() {
+    public String getLangue() {
 		return langue;
 	}
 
@@ -124,7 +123,7 @@ private String email;
 		return representations;
 	}
 
-public User addRepresentation(Representation representation) {
+	public User addRepresentation(Representation representation) {
 		if(!this.representations.contains(representation)) {
 			this.representations.add(representation);
 			representation.addUser(this);

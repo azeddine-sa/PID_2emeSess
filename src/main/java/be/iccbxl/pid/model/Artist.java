@@ -8,14 +8,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="artists")
 public class Artist {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+
+	@NotEmpty(message="Ne peut être vide")
+	@Size(min=2, max=60, message="Doit contenir minimum 2 caracteres et maximum 60.")
 	private String firstname;
+	@NotEmpty(message="Ne peut être vide")
+	@Size(min=2, max=60, message="Doit contenir minimum 2 caracteres et maximum 60.")
 	private String lastname;
 	
 	@ManyToMany(mappedBy = "artists")
@@ -30,6 +37,10 @@ public class Artist {
 
 	public Long getId() {
 		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getFirstname() {
