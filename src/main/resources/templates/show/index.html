@@ -8,6 +8,11 @@
 	<div class="container">
 	     <div layout:fragment="content">
 	        <h1 th:text="${title}">Liste des spectacles</h1>
+
+			 <div class="actions">
+				 <a th:href="@{/shows/export}">Exporter la liste des spectacles en CSV</a>
+				 <br/>
+			 </div>
 	
 	        <ul th:unless="${#lists.isEmpty(shows)}">
             	<li th:each="show : ${shows}">
