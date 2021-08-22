@@ -18,14 +18,14 @@ public class FeedController {
     public Channel rss() {
         Channel channel = new Channel();
         channel.setFeedType("rss_2.0");
-        channel.setTitle("Reservation Feed");
+        channel.setTitle("Reservation spectacles Feed");
         channel.setDescription("Differents Spectacles");
-        channel.setLink("https://Reservation.com");
-        channel.setUri("https://Reservation.com");
+        channel.setLink("https://Reservationspectales.com");
+        channel.setUri("https://Reservationspectales.com");
         channel.setGenerator("In ICC Programming");
 
         Image image = new Image();
-        image.setUrl("https://Reservation.png");
+        image.setUrl("https://Reservationspectales.png");
         image.setTitle("Reservation Feed");
         image.setHeight(32);
         image.setWidth(32);
@@ -35,19 +35,18 @@ public class FeedController {
         channel.setPubDate(postDate);
 
         Item item = new Item();
-        item.setAuthor("Az & Ben");
-        item.setLink("https://Reservation.com/");
+        item.setAuthor("Saouti & Bennour");
+        item.setLink("https://Reservationspectales.com/");
         item.setTitle("Spring CORS Configuration Examples");
-        item.setUri("https://Reservation.com/");
-        item.setComments("https://Reservation.com/");
+        item.setUri("https://Reservationspectales.com/");
+        item.setComments("https://Reservationspectales.com/");
 
         com.rometools.rome.feed.rss.Category category = new com.rometools.rome.feed.rss.Category();
         category.setValue("CORS");
         item.setCategories(Collections.singletonList(category));
 
         Description descr = new Description();
-        descr.setValue(
-                "CORS");
+        descr.setValue("CORS");
         item.setDescription(descr);
         item.setPubDate(postDate);
 
