@@ -2,33 +2,69 @@
 <html xmlns:layout="http://www.ultraq.net.mx/thymeleaf/layout"
  layout:decorate="~{layouts/main}">
 <head>
-<title>Liste des spectacles</title>
+	<title>Liste des spectacles</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
-	<div class="container">
+	<div class="container my-2">
 	     <div layout:fragment="content">
 	        <h1 th:text="${title}">Liste des spectacles</h1>
 
 			 <div class="actions">
-				 <a th:href="@{/shows/export}">Exporter la liste des spectacles en CSV</a>
-				 <br/>
+				 <a th:href="@{/shows/export}"  class="btn btn-primary">Exporter la liste des spectacles en CSV</a>
+				 <br/><br/>
 			 </div>
-	
-	        <ul th:unless="${#lists.isEmpty(shows)}">
-            	<li th:each="show : ${shows}">
-		    <span th:text="${show.title}">Ayiti</span>
-	    	    <span th:if="${show.bookable}" th:text="${show.price} + ' €'">9.99 €</span>
-                <span th:if="${#lists.size(show.representations)==1}">- 1 représentation</span>
-		        <span th:if="${#lists.size(show.representations)>1}" 
-			        th:text="|- ${#lists.size(show.representations)} représentations|">
-                    - 2 représentations
-                </span>
-		        <em th:if="${#lists.size(show.representations)==0}">aucune représentation</em>
-                
-	    	    <a th:href="@{/shows/{id}(id=${show.id})}">View</a>
-		</li>
-	        </ul>
-	    </div>
+
+			 <table border="1" class="table table-striped table-responsive-md">
+				 <thead>
+					 <tr>
+						 <th>Titre</th>
+						 <th>Prix</th>
+						 <th>Nombre de presentations</th>
+						 <th> Actions </th>
+					 </tr>
+				 </thead>
+
+				 <tbody>
+					 <tr th:each="show : ${shows}">
+						 <td th:text="${show.title}">Ayiti</td>
+						 <td th:if="${show.bookable}" th:text="${show.price} + ' €'">9.99 EURO</td>
+						 <td th:switch="${#lists.size(show.representations)}">
+							 <p th:case="0"> Aucune representation</p>
+							 <p th:case="1"> 1 representation</p>
+							 <p th:case="*" th:text="${#lists.size(show.representations)} + '  representations'" />
+						 </td>
+
+						 <td th:href="@{/shows/{id}(id=${show.id})}" class="btn btn-primary">View</td>
+					 </tr>
+				 </tbody>
+			 </table>
+
+
+			<div th:if="${totalPages > 1}">
+				<div class="row col-sm-10">
+					<div class="col-sm-2">
+						Total Rows: [[${totalItems}]]
+					</div>
+					<div class="col-sm-1">
+						<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+						  <a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}}">[[${i}]]</a>
+						  <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+						</span>
+					</div>
+					<div class="col-sm-1">
+						<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}}">Next</a>
+						<span th:unless="${currentPage < totalPages}">Next</span>
+					</div>
+
+					<div class="col-sm-1">
+						<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}}">Last</a>
+						<span th:unless="${currentPage < totalPages}">Last</span>
+					</div>
+				</div>
+			</div>
+		 </div>
 	</div>
 </body>
 </html>

@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -44,5 +47,11 @@ public class ShowService {
 
 	public List<Show> getFromLocation(Location location) {
 		return repository.findByLocation(location);
+	}
+
+
+	public Page<Show> findPaginated(int pageNo, int pageSize) {
+		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+		return this.repository.findAll(pageable);
 	}
 }
