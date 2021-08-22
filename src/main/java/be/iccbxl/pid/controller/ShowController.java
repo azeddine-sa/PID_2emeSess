@@ -8,6 +8,7 @@ import java.util.List;
 
 import be.iccbxl.pid.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,12 +29,12 @@ public class ShowController {
 
 	@GetMapping("/shows")
     	public String index(Model model) {
-		List<Show> shows = service.getAll();
+		//List<Show> shows = service.getAll();
 
-		model.addAttribute("shows", shows);
-		model.addAttribute("title", "Liste des spectacles");
+		//model.addAttribute("shows", shows);
+		//model.addAttribute("title", "Liste des spectacles");
 		
-        	return "show/index";
+        	return findPaginated(1, model);
     	}
 	
 	@GetMapping("/shows/{id}")
@@ -70,6 +71,21 @@ public class ShowController {
 
 		csvWriter.close();
 
+	}
+
+	@GetMapping("/page/{pageNo}")
+	public String findPaginated(@PathVariable(value = "pageNo") int pageNo, Model model) {
+		int pageSize = 2;
+
+		Page< Show > page = service.findPaginated(pageNo, pageSize);
+		List < Show > listShows = page.getContent();
+
+		model.addAttribute("currentPage", pageNo);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
+		model.addAttribute("shows", listShows);
+
+		return "show/index";
 	}
 
 }
