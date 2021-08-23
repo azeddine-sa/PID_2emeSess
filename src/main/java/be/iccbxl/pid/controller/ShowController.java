@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import be.iccbxl.pid.model.Show;
 import be.iccbxl.pid.model.ShowService;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
@@ -34,7 +35,7 @@ public class ShowController {
 		//model.addAttribute("shows", shows);
 		//model.addAttribute("title", "Liste des spectacles");
 		
-        	return findPaginated(1, model);
+        	return findPaginated(1, "title", "asc", model);
     	}
 	
 	@GetMapping("/shows/{id}")
@@ -74,10 +75,11 @@ public class ShowController {
 	}
 
 	@GetMapping("/page/{pageNo}")
-	public String findPaginated(@PathVariable(value = "pageNo") int pageNo, Model model) {
-		int pageSize = 2;
+	public String findPaginated(@PathVariable(value = "pageNo") int pageNo, @RequestParam("sortField") String sortField,
+								@RequestParam("sortDir") String sortDir, Model model) {
+		int pageSize = 6;
 
-		Page< Show > page = service.findPaginated(pageNo, pageSize);
+		Page< Show > page = service.findPaginated(pageNo, pageSize, sortField, sortDir);
 		List < Show > listShows = page.getContent();
 
 		model.addAttribute("currentPage", pageNo);
@@ -85,6 +87,11 @@ public class ShowController {
 		model.addAttribute("totalItems", page.getTotalElements());
 		model.addAttribute("shows", listShows);
 
+		model.addAttribute("sortField", sortField);
+		model.addAttribute("sortDir", sortDir);
+		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+
+		model.addAttribute("listEmployees", listShows);
 		return "show/index";
 	}
 
