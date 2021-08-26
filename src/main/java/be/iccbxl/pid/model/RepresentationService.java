@@ -1,6 +1,7 @@
 package be.iccbxl.pid.model;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,5 +49,14 @@ public class RepresentationService {
 	
 	public List<Representation> getFromShow(Show show) {
 		return repository.findByShow(show);
+	}
+
+	public List<Representation> getLastShows(int limit) {
+		List<Representation> list = getAll();
+		list.sort(Comparator.comparing(Representation::getWhen));
+		if (list.size()<limit){
+			limit = list.size();
+		}
+		return list.subList(0, limit);
 	}
 }
