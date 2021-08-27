@@ -6,21 +6,36 @@
 </head>
 <body>
 	<div class="container">
-	     <div layout:fragment="content">
-	        <h1 th:text="${title}">Liste des représentations de spectacle</h1>
-	
-	        <ul th:unless="${#lists.isEmpty(representations)}">
-            	<li th:each="representation : ${representations}">
-		    <span th:text="${representation.show.title}">Ayiti</span>
-	    	    <span th:if="${representation.location}" 
-	    		th:text="' - '+${representation.location.designation}">- Art Center</span>
-		    <span th:text="${#temporals.format(representation.when,'dd-MM-yyyy')}">
-			12-10-2012</span>
-	    	    <span th:text="${#temporals.format(representation.when,'HH:mm')}">
-			13:30</span>
-	    	    <a th:href="@{/representations/{id}(id=${representation.id})}">View</a>
-		</li>
-	        </ul>
+	     <div layout:fragment="content" class="wrapper">
+	        <h1 th:text="${title}" class="text-center">Liste des représentations de spectacle</h1>
+			<table class="table table-striped">
+				<thead>
+				  <tr>
+					<th scope="col">Nom du Spectacle</th>
+					<th scope="col">Lieu de representation</th>
+					<th scope="col">Date</th>
+					<th scope="col">Heure</th>
+					<th scope="col">Détails</th>
+				  </tr>
+				</thead>
+				<tbody>
+	                <tr th:each="representation : ${representations}">
+	                    <td th:text="${representation.show.title}">
+							Ayiti
+						</td>
+	                    <td><a th:if="${representation.location}" th:text="${representation.location.designation}">
+							Salle Delvaux</a>
+						</td>
+						<td><a th:text="${#temporals.format(representation.when,'dd-MM-yyyy')}">
+							12-10-2012</a>
+						</td>
+						<td><a th:text="${#temporals.format(representation.when,'HH:mm')}">
+							13:00</a>
+						</td>
+						<td class="text-center"><a th:href="@{/representations/{id}(id=${representation.id})}" >More</a></td>
+	                </tr>
+	            </tbody>
+			</table>
 	    </div>
 	</div>
 </body>
