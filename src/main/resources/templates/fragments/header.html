@@ -5,7 +5,62 @@
     <title>Header fragment</title>
   </head>
   <body>
-    <header class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
+    <header class='bg-dark text-white' th:fragment="header">
+      <!-- Header en 3 partie '<div>' -->
+  <div class="row align-items-center m-0 p-2">
+      <!-- Partie gauche -->
+      <div class="col-1 m-0 p-1 text-right d-none d-md-block text-center">
+        PID <br/> 2020-2021
+    </div>
+      <!-- Partie centrale : menu -->
+      <div class="col-11 m-0 p-0">
+          <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+              <!-- Menu sandwich - taille small ecran -->
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav mr-auto">
+                      <!-- Lien menu-->
+                      <li class="nav-item active">
+                          <a class="nav-link" href="../Pages">Home</a>
+                      </li>
+                      <!-- Lien menu deroulant-->
+                      <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Menu Deroulant
+                          </a>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="#">Sous-menu1</a>
+                              <a class="dropdown-item" href="#">Sous-Menu2</a>
+                          </div>
+                      </li>
+                      <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Menu Deroulant2
+                          </a>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="#">Sous-menu1</a>
+                              <a class="dropdown-item" href="#">Sous-Menu2</a>
+                          </div>
+                      </li><li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Contact
+                          </a>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="../Pages/contact.php">Contactez-nous</a>
+                              <a class="dropdown-item" href="../Pages/Forms.php">Inscription</a>
+                          </div>
+                      </li>
+                      </ul>
+              </div>
+          </nav>
+      </div>
+  </div>
+</header>
+    <!-- 
+      <header class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
       <div class="container">
         <div class="navbar-header">
           <a class="navbar-brand" href="#">Réservations</a>
@@ -37,5 +92,6 @@
         </div>
       </div>
     </header>
+      -->
   </body>
 </html>

@@ -11,19 +11,36 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 
 @Entity
 @Table(name="users")
 public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+
 	private Long id;
+
+	@NotEmpty(message ="Veuillez introduire un login")
+	@Size(min = 5, max = 30, message = "Doit contenir minimum 5 caractères")
 	private String login;
+	@NotEmpty
 	private String password;
+	@NotEmpty
 	private String firstname;
+	@NotEmpty
 	private String lastname;
+	@NotEmpty
+	@Email
 	private String email;
+	@NotEmpty
+	@NotNull
 	private String langue;
+
 	private LocalDateTime created_at;
 	
 	@ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
@@ -32,8 +49,10 @@ public class User {
 	@ManyToMany(mappedBy = "users")
 	private List<Representation> representations = new ArrayList<>();
 
-	protected User() {}
-
+	public User(){
+		this.created_at = LocalDateTime.now();
+	}
+	
 	public User(String login, String firstname, String lastname) {
 		this.login = login;
 		this.firstname = firstname;
@@ -41,7 +60,18 @@ public class User {
 		this.created_at = LocalDateTime.now();
 	}
 
-	public Long getId() {
+	public User(String login, String password, String firstname, String lastname, String email, String langue) {
+
+		this.login = login;
+		this.password = password;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.email= email;
+		this.langue = langue;
+		this.created_at = LocalDateTime.now();
+    }
+
+    public Long getId() {
 		return id;
 	}	
 	

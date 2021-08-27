@@ -3,20 +3,25 @@ package be.iccbxl.pid.controller;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import be.iccbxl.pid.model.Locality;
 import be.iccbxl.pid.model.RoleRepository;
 import be.iccbxl.pid.model.User;
+import be.iccbxl.pid.model.UserRepository;
 import be.iccbxl.pid.model.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-
+import org.springframework.web.bind.annotation.PostMapping;
 import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
@@ -30,6 +35,7 @@ public class UserController {
     @Autowired
     private RoleRepository roleRepository;
 
+
     @GetMapping("/users")
     public String index(Model model) {
         List<User> users = service.getAllUsers();
@@ -38,6 +44,21 @@ public class UserController {
         model.addAttribute("title", "Liste des utilisateurs");
 
         return "user/index";
+    }
+
+    @GetMapping("/signup")
+    public String showSignUpForm(User user) {
+        return "user/register";
+    }
+    
+    @PostMapping("user/register")
+    public String addUser(@Valid User user, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "user/register";
+        }
+        
+        service.addUser(user);
+            return "redirect:/";
     }
 
     @GetMapping("/users/export")
