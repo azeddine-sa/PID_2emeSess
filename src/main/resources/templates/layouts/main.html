@@ -6,12 +6,13 @@ xmlns:layout="http://www.ultraq.net.mx/thymeleaf/layout">
         <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Projet Réservations</title>
 	<th:block layout:fragment="css">
         <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" th:href="@{/styles/main.css}" />
 	</th:block>
     </head>
     <body>
         <div th:replace="fragments/header :: header">Header here</div>
-        <div class="container">
-            <div layout:fragment="content">Main content will be inserted here.</div>
+        <div class="container" >
+            <div layout:fragment="content" id="contentWidth">Main content will be inserted here.</div>
         </div>
       <div th:replace="fragments/footer :: footer">&copy; 2016 The Static Templates</div>
       <th:block layout:fragment="scripts">
