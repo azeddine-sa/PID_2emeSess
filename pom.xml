@@ -84,16 +84,22 @@
 			<artifactId>bootstrap</artifactId>
 			<version>5.1.0</version>
 		</dependency>
-		 <!-- https://mvnrepository.com/artifact/commons-validator/commons-validator -->
-		 <dependency>
+		<!-- https://mvnrepository.com/artifact/commons-validator/commons-validator -->
+		<dependency>
 			<groupId>commons-validator</groupId>
 			<artifactId>commons-validator</artifactId>
 			<version>1.6</version>
 		</dependency>
+		<!-- Bootstrap-->
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>webjars-locator-core</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
+			<version>3.0.4.RELEASE</version>
+		 </dependency>
 	</dependencies>
 
 	<build>

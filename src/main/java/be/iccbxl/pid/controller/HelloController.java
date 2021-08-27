@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 import be.iccbxl.pid.model.User;
 
 
-@RestController
+@Controller
 public class HelloController {
 
     @GetMapping("/")
     public String index() {
-        return "Welcome to Our WebSite";
+        return "index/index";
     }
 
     @GetMapping("/admin")
@@ -33,6 +33,11 @@ public class HelloController {
     @GetMapping("/member")
     public String member() {
         return "Hi Member!";
+    }
+
+    @GetMapping("/affiliate")
+    public String affiliate() {
+        return "Hi Affiliate!";
     }
 
 }
