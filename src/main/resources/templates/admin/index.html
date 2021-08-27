@@ -2,12 +2,12 @@
 <html lang="fr" xmlns:layout="http://www.ultraq.net.mx/thymeleaf/layout"
       layout:decorate="~{layouts/main}">
 <head>
-    <title>Liste des utilisateurs</title>
+    <title>Bienvenue sur notre site !</title>
 </head>
 <body>
 <div class="container">
     <div layout:fragment="content">
-        <h1 th:text="${title}">Liste des utilisateurs</h1>
+        <h1>Hello Admin <span>[[${#request.remoteUser}]]</span> ! </h1>
     </div>
 </div>
 </body>

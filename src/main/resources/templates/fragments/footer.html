@@ -5,8 +5,15 @@
     <title>Footer fragment</title>
   </head>
   <body>
-    <footer th:fragment="footer">
+    <footer th:fragment="footer" class="text-center">
       &copy; 2021 – EPFC / ICC – Projet Réservations
+      <div>
+        <a href="rss">
+          <img th:src="@{'/images/logo-rss.png'}" alt="Flux RSS" style="width:90px;"/>
+        </a>
+        <br/>
+        <br/>
+      </div>
     </footer>
   </body>
 </html>

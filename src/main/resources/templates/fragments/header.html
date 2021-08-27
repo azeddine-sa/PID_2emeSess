@@ -5,7 +5,72 @@
     <title>Header fragment</title>
   </head>
   <body>
-    <header class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
+    <header class='bg-dark text-white' th:fragment="header">
+      <!-- Header en 3 partie '<div>' -->
+  <div class="row align-items-center m-0 p-1">
+      <!-- Partie gauche -->
+      <div class="col-1 m-0 p-1 text-right d-none d-md-block text-center">
+        PID <br/> 2020-2021
+      </div>
+      <!-- Partie centrale : menu -->
+      <div class="col-10 m-0 p-0">
+          <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+              <!-- Menu sandwich - taille small ecran -->
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav mr-auto">
+                      <!-- Lien menu-->
+                      <li class="nav-item active">
+                          <a class="nav-link" href="/">Home</a>
+                      </li>
+                      <!-- Lien menu deroulant-->
+                      <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Spectacles
+                          </a>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="/shows">Shows</a>
+                              <a class="dropdown-item" href="/representations">Representations</a>
+                          </div>
+                      </li>
+                      <li sec:authorize="hasAuthority('admin')" class="nav-item dropdown" > 
+                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Menu Admin
+                          </a>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="/artists">Artistes</a>
+                              <a class="dropdown-item" href="/types">Types</a>
+                              <a class="dropdown-item" href="/roles">Roles</a>
+                              <a class="dropdown-item" href="/localities">Localités</a>
+                          </div>
+                      </li>
+                      <li sec:authorize="isAnonymous()" class="nav-item active">
+                        <a class="nav-link" href="/signup">S'inscrire</a>
+                      </li>
+                    </ul>
+                    
+              </div>
+              <!-- Partie droite -->
+              <div sec:authorize="isAuthenticated()" class="col-2 m-0 p-1 text-right d-none d-md-block float-right">
+                Hello [[${#request.remoteUser}]] ! 
+                <a href="logout">
+                  <img th:src="@{'/images/log-out.png'}" alt="icon user" style="width:35px"/>
+                </a>
+              </div>
+              <div sec:authorize="isAnonymous()" class="col-2 m-0 p-1 text-right d-none d-md-block float-right">
+                <a href="login">
+                  <img th:src="@{'/images/icon-user.png'}" alt="icon logout" style="width:35px"/>
+                </a>
+              </div>
+          </nav>
+      </div>
+  </div>
+</header>
+    <!-- 
+      <header class="navbar navbar-inverse navbar-fixed-top" th:fragment="header">
       <div class="container">
         <div class="navbar-header">
           <a class="navbar-brand" href="#">Réservations</a>
@@ -37,5 +102,6 @@
         </div>
       </div>
     </header>
+      -->
   </body>
 </html>

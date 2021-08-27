@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:layout="http://www.ultraq.net.mx/thymeleaf/layout"
+      layout:decorate="~{layouts/main}">
+<head>
+    <title>Liste des utilisateurs</title>
+</head>
+<body>
+<div class="container">
+    <div layout:fragment="content" class="row justify-content-center">
+        <div class="col col-md-5 text-center">
+            <form method="POST" th:action="@{user/register}" th:object="${user}">
+                <h1 class="display-4">Inscription</h1>
+
+                <div class="form-row py-1">
+                    <label>Email</label>
+                    <input type="text" class="form-control" name="email" th:field="*{email}">
+                    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                </div>
+
+                <div class="form-row py-1">
+                    <label>Nom d'utilisateur</label>
+                    <input type="text" class="form-control" name="login" th:field="*{login}">
+                    <span th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></span>
+                </div>
+
+                <div class="form-row py-1">
+                    <label>Mot de Passe</label>
+                    <input type="password" class="form-control" name="password" th:field="*{password}">
+                    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                </div>
+
+                <div class="form-row py-1">
+                    <label>Vérification Mot de Passe</label>
+                    <input type="password" class="form-control" name="repassword" >
+                    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                </div>
+
+                <div class="form-row py-1">
+                    <label>Nom</label>
+                    <input type="text" class="form-control" name="lastname" th:field="*{lastname}">
+                    <span th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></span>
+                </div>
+
+                <div class="form-row py-1">
+                    <label>Prénom</label>
+                    <input type="text" class="form-control" name="firstname" th:field="*{firstname}">
+                    <span th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></span>
+                </div>
+
+                <div class="form-row py-1">
+                    <label for="inlineFormCustomSelect">Langue</label>
+                    <select class="form-control" id="inlineFormCustomSelect" th:field="*{langue}">
+                      <option selected value="null">Choisir votre langue...</option>
+                      <option value="fr">Français</option>
+                      <option value="nl">Néerlandais</option>
+                      <option value="en">Anglais</option>
+                    </select>
+                    <span th:if="${#fields.hasErrors('langue')}" th:errors="*{langue}"></span>
+                </div>
+
+                <br/>
+
+                <div class="form-row py-1">
+                    <button type="submit" class="btn btn-info btn-block">
+                        Créer un compte
+                    </button>
+                </div>
+            </form>
+
+            <p class="py-2">
+                Déjà inscrit ? <a href="/login">Se connecter</a>
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

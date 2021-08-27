@@ -17,6 +17,7 @@
 			 </div>
 
 			<div>
+			<!-- barre de recherche-->
 			 <form th:action="@{/page/1}">
 				 <input type="hidden" name="sortField" th:value="${sortField}"/>
 				 <input type="hidden" name="sortDir" th:value="${sortDir}"/>
@@ -28,7 +29,8 @@
 			 </form>
 			</div>
 			<div>&nbsp;</div>
-			 <table border="1" cellpadding="10">
+
+			 <table class="table table-striped">
 				 <thead>
 					 <tr>
 						 <th><a th:href="@{'/page/' + ${currentPage} + '?sortField=title&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">
@@ -51,7 +53,8 @@
 							 <p th:case="*" th:text="${#lists.size(show.representations)} + '  representations'" />
 						 </td>
 
-						 <td th:href="@{/shows/{id}(id=${show.id})}" class="btn btn-primary">View</td>
+						 <td class="text-center"><a th:href="@{/shows/{id}(id=${show.id})}" >More</a></td>
+	            
 					 </tr>
 				 </tbody>
 			 </table>
