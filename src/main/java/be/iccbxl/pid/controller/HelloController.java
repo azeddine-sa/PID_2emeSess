@@ -17,18 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 import be.iccbxl.pid.model.User;
 
 
-@Controller
+@RestController
 public class HelloController {
 
-    private static List<User> users = new ArrayList<User>();
-
     @GetMapping("/")
-    public String index(@ModelAttribute User user, Model model) {
-        model.addAttribute("user", user);
-        return "user/register";
+    public String index() {
+        return "Welcome to Our WebSite";
     }
-
-       
 
     @GetMapping("/admin")
     public String admin() {
