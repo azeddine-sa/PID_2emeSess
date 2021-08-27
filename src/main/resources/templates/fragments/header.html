@@ -36,22 +36,19 @@
                               <a class="dropdown-item" href="/representations">Representations</a>
                           </div>
                       </li>
-                      <li sec:authorize="hasRole('admin')" class="nav-item dropdown" > 
+                      <li sec:authorize="hasAuthority('admin')" class="nav-item dropdown" > 
                           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Menu Deroulant2
+                          Menu Admin
                           </a>
                           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="#">Sous-menu1</a>
-                              <a class="dropdown-item" href="#">Sous-Menu2</a>
+                              <a class="dropdown-item" href="/artists">Artistes</a>
+                              <a class="dropdown-item" href="/types">Types</a>
+                              <a class="dropdown-item" href="/roles">Roles</a>
+                              <a class="dropdown-item" href="/localities">Localités</a>
                           </div>
-                      </li><li class="nav-item dropdown">
-                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Contact
-                          </a>
-                          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="../Pages/contact.php">Contactez-nous</a>
-                              <a class="dropdown-item" href="../Pages/Forms.php">Inscription</a>
-                          </div>
+                      </li>
+                      <li sec:authorize="isAnonymous()" class="nav-item active">
+                        <a class="nav-link" href="/signup">S'inscrire</a>
                       </li>
                     </ul>
                     

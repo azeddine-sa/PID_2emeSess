@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:layout="http://www.ultraq.net.mx/thymeleaf/layout"
+      layout:decorate="~{layouts/main}">
+<head>
+    <title>Bienvenue sur notre site !</title>
+</head>
+<body>
+<div class="container">
+    <div layout:fragment="content">
+        <h1> 
+            Bienvenue <span>[[${#request.remoteUser}]]</span> !
+            <br/><br/>
+            Cette page est à tous membres connectés!
+        </h1>
+
+    </div>
+</div>
+</body>
+</html>

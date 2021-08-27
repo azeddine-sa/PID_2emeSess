@@ -27,17 +27,17 @@ public class HelloController {
 
     @GetMapping("/admin")
     public String admin() {
-        return "Hi Admin!";
+        return "admin/index";
     }
     
     @GetMapping("/member")
     public String member() {
-        return "Hi Member!";
+        return "member/index";
     }
 
     @GetMapping("/affiliate")
     public String affiliate() {
-        return "Hi Affiliate!";
+        return "affiliate/index";
     }
 
 }
