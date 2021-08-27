@@ -9,6 +9,7 @@ import java.util.List;
 import be.iccbxl.pid.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,12 +31,13 @@ public class ShowController {
 
 	@GetMapping("/shows")
     	public String index(Model model) {
+		String keyword = null;
 		//List<Show> shows = service.getAll();
 
 		//model.addAttribute("shows", shows);
 		//model.addAttribute("title", "Liste des spectacles");
 		
-        	return findPaginated(1, "title", "asc", model);
+        	return findPaginated(1, "title", "asc", keyword, model);
     	}
 	
 	@GetMapping("/shows/{id}")
@@ -76,10 +78,10 @@ public class ShowController {
 
 	@GetMapping("/page/{pageNo}")
 	public String findPaginated(@PathVariable(value = "pageNo") int pageNo, @RequestParam("sortField") String sortField,
-								@RequestParam("sortDir") String sortDir, Model model) {
-		int pageSize = 6;
+								@RequestParam("sortDir") String sortDir, @Param("keyword") String keyword, Model model) {
+		int pageSize = 3;
 
-		Page< Show > page = service.findPaginated(pageNo, pageSize, sortField, sortDir);
+		Page< Show > page = service.findPaginated(pageNo, pageSize, sortField, sortDir, keyword);
 		List < Show > listShows = page.getContent();
 
 		model.addAttribute("currentPage", pageNo);
@@ -92,6 +94,7 @@ public class ShowController {
 		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
 
 		model.addAttribute("listEmployees", listShows);
+		model.addAttribute("keyword", keyword);
 		return "show/index";
 	}
 

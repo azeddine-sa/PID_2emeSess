@@ -16,14 +16,26 @@
 				 <br/><br/>
 			 </div>
 
-			 <table border="1" class="table table-striped table-responsive-md">
+			<div>
+			 <form th:action="@{/page/1}">
+				 <input type="hidden" name="sortField" th:value="${sortField}"/>
+				 <input type="hidden" name="sortDir" th:value="${sortDir}"/>
+				 Filtre: <input type="text" name="keyword" id="keyword" size="45" th:value="${keyword}" required />
+				 &nbsp;
+				 <input type="submit" value="Search" class="btn btn-primary"/>
+				 &nbsp;
+				 <input type="button" value="Clear" onclick="clearFilter()" class="btn btn-primary"/>
+			 </form>
+			</div>
+			<div>&nbsp;</div>
+			 <table border="1" cellpadding="10">
 				 <thead>
 					 <tr>
-						 <th><a th:href="@{'/page/' + ${currentPage} + '?sortField=title&sortDir=' + ${reverseSortDir}}">
+						 <th><a th:href="@{'/page/' + ${currentPage} + '?sortField=title&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">
 							 Titre</a> </th>
-						 <th><a th:href="@{'/page/' + ${currentPage} + '?sortField=price&sortDir=' + ${reverseSortDir}}">
+						 <th><a th:href="@{'/page/' + ${currentPage} + '?sortField=price&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">
 							 Prix</a></th>
-						 <th><a th:href="@{'/page/' + ${currentPage} + '?sortField=representations&sortDir=' + ${reverseSortDir}}">
+						 <th><a th:href="@{'/page/' + ${currentPage} + '?sortField=representations&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">
 							 Nombre de representations</a></th>
 						 <th> Actions </th>
 					 </tr>
@@ -47,27 +59,41 @@
 
 			<div th:if="${totalPages > 1}">
 				<div class="row col-sm-10">
-					<div class="col-sm-2">
-						Total Rows: [[${totalItems}]]
+					<div class="col-sm-3">
+						Total lignes: [[${totalItems}]] - Page [[${currentPage}]] / [[${totalPages}]]
+						&nbsp; &nbsp;
 					</div>
 					<div class="col-sm-1">
+						<a th:if="${currentPage > 1}" th:href="@{'/page/?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Première</a>
+						<span th:unless="${currentPage > 1}">Première</span>
+						&nbsp; &nbsp;
+					</div>
+					<div class="col-sm-1">
+						<a th:if="${currentPage > 1}" th:href="@{'/page/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Précédent</a>
+						<span th:unless="${currentPage > 1}">Précédent</span>
+						&nbsp; &nbsp;
+					</div>
+					<div>&nbsp; &nbsp;</div>
+					<div class="col-sm-1">
 						<span th:each="i: ${#numbers.sequence(1, totalPages)}">
-						  <a th:if="${currentPage != i}" th:href="@{'/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
-						  <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+							<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">[[${i}]]</a>
+						  <span th:unless="${currentPage != i}">[[${i}]]</span>
+							&nbsp; &nbsp;
 						</span>
 					</div>
 					<div class="col-sm-1">
-						<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
-						<span th:unless="${currentPage < totalPages}">Next</span>
+						<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Suivant</a>
+						<span th:unless="${currentPage < totalPages}">Suivant</span>
+						&nbsp; &nbsp;
 					</div>
-
 					<div class="col-sm-1">
-						<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
-						<span th:unless="${currentPage < totalPages}">Last</span>
+						<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Dernière</a>
+						<span th:unless="${currentPage < totalPages}">Dernière</span>
 					</div>
 				</div>
 			</div>
 		 </div>
 	</div>
+
 </body>
 </html>
