@@ -11,7 +11,7 @@
 	     <div layout:fragment="content">
 	        <h1 th:text="${title}">Liste des spectacles</h1>
 
-			 <div class="actions">
+			 <div sec:authorize="hasAuthority('admin')" class="actions">
 				 <a th:href="@{/shows/export}"  class="btn btn-primary btn-sm mb-3">Exporter la liste des spectacles en CSV</a>
 				 <br/><br/>
 			 </div>
